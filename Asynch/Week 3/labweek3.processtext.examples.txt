@@ -1,0 +1,43 @@
+# Lab Week 3 - Processing Text
+# This file has small examples that are meant to be run individually
+#   in the Python shell
+
+import nltk
+
+# text from online gutenberg
+# continue to select only the tokens of the text# OPTIONAL# to get the path to the directory of the python interpreter:
+import os
+os.getcwd()
+## put the file in that directory
+f = open('CrimeAndPunishment.txt')rawtext = f.read()
+# END OPTIONAL
+
+## reading text from a file by specifying the full path
+## put the path of your machine here
+## if jupyter notebook was opened in this folder, just put the file name
+fin = open(‘H:\NLPclass\LabExamplesWeek3\CrimeAndPunishment.txt’)rawtext = fin.read()
+## Mac users, put your path in a format similar to this
+## if jupyter notebook was opened in this folder, just put the file name
+fin = open('/Users/njmccrac/AAAdocs/NLPfall2017/labs/LabExamplesWeek3/CrimeAndPunishment.txt')rawtext = fin.read()
+## create tokens, and continue to use textcrimetokens = nltk.word_tokenize(rawtext)text = nltk.Text(crimetokens)text.concordance('pass')
+# close file at the endfin.close()
+
+### Stemming and Lemmatization
+## get text from a file and create tokens (use \ on PCs, and / on Macs)
+fin = open('CrimeAndPunishment.txt')
+crimetext = fin.read()
+crimetokens = nltk.word_tokenize(crimetext)print(len(crimetokens))print(crimetokens[:100])
+
+#use NLTK's stemmers (section 3.6 in NLTK book)
+porter = nltk.PorterStemmer()
+lancaster = nltk.LancasterStemmer()
+
+# compare Porter and Lancaster stemmers on the tokens
+crimePstem = [porter.stem(t) for t in crimetokens]print(crimePstem[:200])crimeLstem = [lancaster.stem(t) for t in crimetokens]print(crimeLstem[:200])
+
+# NLTK has a lemmatizer that uses WordNet as a dictionary
+wnl = nltk.WordNetLemmatizer()
+crimeLemma = [wnl.lemmatize(t) for t in crimetokens]
+print(crimeLemma[:200])
+
+

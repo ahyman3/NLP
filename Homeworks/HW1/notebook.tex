@@ -1,0 +1,1182 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW \#1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Alex Hyman
+
+Homework \#1
+
+10/16/2018
+
+\subsubsection{Choosing the Text}\label{choosing-the-text}
+
+The two texts I have chosen to compare are Moby Dick by Herman Melville
+and 20,000 Leagues Under the Sea by Jules Verne. On the surface, both of
+the texts have many similarities, primarily the setting being at sea and
+a climactic fight with a giant sea animal, but I am most interested in
+the differences in words between the American Melville and the
+translated words from the French Verne. Specifically, I am primarily
+interested in seeing if the translation of the French 20,000 Leagues
+Under the Sea has any of the American-isms or descriptive language that
+Moby Dick contains, or if the text contains more straightforward
+story-telling. The Moby Dick corpus was collected from the Gutenberg
+Project text already loaded into the nltk package, and 20,000 Leagues
+Under the Sea was collected from the project Gutenberg Project as a text
+file.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{nltk}
+        \PY{k+kn}{import} \PY{n+nn}{re}
+        
+        \PY{c+c1}{\PYZsh{}Open 20,000 Leagues under the sea file}
+        \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{leagues.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}Get the text from the file}
+        \PY{n}{leagues} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}Get the text of moby dick}
+        \PY{n}{mobydick} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{corpus}\PY{o}{.}\PY{n}{gutenberg}\PY{o}{.}\PY{n}{raw}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{melville\PYZhy{}moby\PYZus{}dick.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Processing the Text}\label{processing-the-text}
+
+The key to processing the text in this analysis is to tokenize the
+various test. 20,000 Leagues has already been read into the python
+environment as a string from the text file, and Moby Dick was loaded
+into the python environment through the nltk package. To make the texts
+usable, the contents need to be separated into tokens. The
+nltk.word\_tokenize function will be used to separate the puctuation and
+the various words.
+
+One issue I had found during this step was that there were a lot of
+words that did not seem appropriate in the 20,000 leagues tokens. It
+turned out that the 20,000 Leagues Under the Sea file downloaded from
+the Project Gutenberg website contained a long list of credits and text
+unrelated to the actual novel, referring to how the text was a part of
+the Gutenberg Project and in the public domain. Because of this, weird
+bigrams began showing up that did not make sense in the context.
+Therefore, in the .txt file I had download, I deleted everything above
+the note "***\emph{Book begins here}\textbf{*" and everything after the
+note "***\emph{Book ends here}}*". 20,000 Leagues Under the Sea was
+found to have 123677 tokens and Moby Dick was fount to have 254989
+tokens.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{}Tokenize 20,000 Leagues}
+         \PY{n}{leaguesTokens} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n}{leagues}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Tokenize moby dick}
+         \PY{n}{mobydickTokens} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n}{mobydick}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Make all tokens lowercase in both texts}
+         \PY{n}{leaguesTokens} \PY{o}{=} \PY{p}{[}\PY{n}{w}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{leaguesTokens}\PY{p}{]}
+         \PY{n}{mobydickTokens} \PY{o}{=} \PY{p}{[}\PY{n}{w}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{mobydickTokens}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Moby Dick \PYZsh{} of tokens: }\PY{l+s+si}{\PYZob{}:d\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{mobydickTokens}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{20,000 Leagues Under the Sea \PYZsh{} of tokens: }\PY{l+s+si}{\PYZob{}:d\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{leaguesTokens}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Moby Dick \# of tokens: 254989
+20,000 Leagues Under the Sea \# of tokens: 123677
+
+    \end{Verbatim}
+
+    \subsubsection{Alphabetical and Stopword
+Filter}\label{alphabetical-and-stopword-filter}
+
+While an alphabetical and stopword filter will not be used to remove
+words before the bigram analysis, a stopword and non-alphabetical filter
+will be used to remove words from the word frequency analysis; and after
+the bigrams are processed, this filter will remove bigrams that contain
+punctuation or stopwords. Additionally, french stopwords were included
+in this filter because of the presence of some french articles in 20,000
+Leagues under the sea (la, le, les, etc.).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}Returns true for any stopwords and any non\PYZhy{}alphabetic tokens}
+        \PY{k}{def} \PY{n+nf}{alphaFilter}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{:}
+            \PY{n}{stopwords} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{corpus}\PY{o}{.}\PY{n}{stopwords}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{english}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{stopwords} \PY{o}{=} \PY{n}{stopwords} \PY{o}{+} \PY{n}{nltk}\PY{o}{.}\PY{n}{corpus}\PY{o}{.}\PY{n}{stopwords}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{french}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{if} \PY{n}{word} \PY{o+ow}{in} \PY{n}{stopwords}\PY{p}{:}
+                \PY{k}{return} \PY{k+kc}{True}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{pattern} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[\PYZca{}a\PYZhy{}z]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{m} \PY{o}{=} \PY{n}{pattern}\PY{o}{.}\PY{n}{match}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                \PY{k}{if} \PY{n}{m} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{k}{return} \PY{k+kc}{True}
+\end{Verbatim}
+
+
+    \section{Moby Dick Corpus Statistics}\label{moby-dick-corpus-statistics}
+
+    \subsubsection{Word Frequency}\label{word-frequency}
+
+First, a word frequency analysis was conducted on the Moby Dick tokens.
+The alphabetical and stopword filter was applied to the tokens in the
+Moby Dick tokens list, but was applied only within the FreqDist function
+to ensure the stopwords and punctuation remained for the bigram
+analysis. With these tokens removed from the Moby Dick token list, a
+Frequency Dictionary was created.
+
+Next, the most\_common method was used on the dictionary to find the 50
+most used words not removed from the filter. Then, with each of the
+words and counts in the most common 50 words, the word was printed,
+along with the word count number divided by the length of the entire
+Moby Dick token list. This normalized the word counts to be between 0
+and 1, with the frequency shown being the fraction of how many times the
+token appears, compared to all other tokens.
+
+The words that appeared on the word frequency list were typically either
+related to the sea, masculine, or a fairly general noun, verb, or
+adjective. "Whale" was the most frequently occurring word, followed by
+"one" and "like". There also appears to be a prevalence of stereotypical
+old english words in the word frequency list, including "upon", "ye",
+"yet", and "thou".
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}Creating a frequency dictionary with the applied filter}
+        \PY{n}{mobyDict} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{FreqDist}\PY{p}{(}\PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{mobydickTokens} \PY{k}{if} \PY{o+ow}{not} \PY{n}{alphaFilter}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Moby Dick Normalized Word Frequency \PYZhy{} Stopwords Removed}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}For each word and count for the 50 most common words in the dictionary...}
+        \PY{k}{for} \PY{n}{w}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n}{mobyDict}\PY{o}{.}\PY{n}{most\PYZus{}common}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}Print the word and the count divided by the number of tokens in the non\PYZhy{}filtered}
+            \PY{c+c1}{\PYZsh{}tokenized list}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Word: }\PY{l+s+si}{\PYZob{}:s\PYZcb{}}\PY{l+s+s2}{        }\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Frequency: }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{c} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{mobydickTokens}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Moby Dick Normalized Word Frequency - Stopwords Removed
+
+Word: whale        	Frequency: 0.00426
+Word: one        	Frequency: 0.00358
+Word: like        	Frequency: 0.00227
+Word: upon        	Frequency: 0.00222
+Word: ahab        	Frequency: 0.00199
+Word: man        	Frequency: 0.00192
+Word: ship        	Frequency: 0.00182
+Word: old        	Frequency: 0.00174
+Word: ye        	Frequency: 0.00172
+Word: would        	Frequency: 0.00171
+Word: sea        	Frequency: 0.00151
+Word: though        	Frequency: 0.00150
+Word: yet        	Frequency: 0.00135
+Word: time        	Frequency: 0.00128
+Word: captain        	Frequency: 0.00127
+Word: long        	Frequency: 0.00125
+Word: still        	Frequency: 0.00122
+Word: said        	Frequency: 0.00119
+Word: great        	Frequency: 0.00119
+Word: two        	Frequency: 0.00113
+Word: boat        	Frequency: 0.00113
+Word: must        	Frequency: 0.00111
+Word: seemed        	Frequency: 0.00111
+Word: head        	Frequency: 0.00109
+Word: last        	Frequency: 0.00108
+Word: see        	Frequency: 0.00105
+Word: thou        	Frequency: 0.00105
+Word: whales        	Frequency: 0.00105
+Word: way        	Frequency: 0.00104
+Word: stubb        	Frequency: 0.00100
+Word: n't        	Frequency: 0.00099
+Word: queequeg        	Frequency: 0.00099
+Word: little        	Frequency: 0.00098
+Word: white        	Frequency: 0.00097
+Word: round        	Frequency: 0.00096
+Word: say        	Frequency: 0.00095
+Word: sperm        	Frequency: 0.00094
+Word: three        	Frequency: 0.00094
+Word: men        	Frequency: 0.00093
+Word: may        	Frequency: 0.00093
+Word: first        	Frequency: 0.00092
+Word: every        	Frequency: 0.00091
+Word: us        	Frequency: 0.00089
+Word: much        	Frequency: 0.00087
+Word: could        	Frequency: 0.00087
+Word: well        	Frequency: 0.00086
+Word: never        	Frequency: 0.00081
+Word: hand        	Frequency: 0.00080
+Word: good        	Frequency: 0.00077
+Word: almost        	Frequency: 0.00076
+
+    \end{Verbatim}
+
+    \subsubsection{Bigram Frequency}\label{bigram-frequency}
+
+The Moby Dick corpus then had its bigrams analyzed for both frequency
+and PMI. First, the bigram association measures were saved in a variable
+called bigram\_measures and a finder was created to find all bigrams in
+the list of Moby Dick tokens. The non-alphabetical and puctiation filter
+was applied to the finder, and then the bigram frequency was scored.
+Finally, the bigram along with the frequency of the top 50 bigrams were
+printed out.
+
+The contents of the bigrams include have a general theme of being
+related to the ocean, and specifically whales. The top four bigrams were
+("sperm", "whale"), ("white", "whale"), and ("moby", "dick"). It was
+also noticable there were a few instances where people were crying out
+({[}"cried", "ahab"{]}, {[}"cried", "stubb"{]}, {[}"cried",
+"starbuck"{]}). This suggests that maybe there were some struggle on the
+ship. This is further supported by the bigram ("poor", "queequeg"),
+which is the name of a character in the novel.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}variable to store all the bigram measures}
+        \PY{n}{bigram\PYZus{}measures} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{BigramAssocMeasures}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Finds bigrams from }
+        \PY{n}{finder} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{BigramCollocationFinder}\PY{o}{.}\PY{n}{from\PYZus{}words}\PY{p}{(}\PY{n}{mobydickTokens}\PY{p}{)}
+        \PY{n}{finder}\PY{o}{.}\PY{n}{apply\PYZus{}word\PYZus{}filter}\PY{p}{(}\PY{n}{alphaFilter}\PY{p}{)}
+        \PY{n}{mobyFreq} \PY{o}{=} \PY{n}{finder}\PY{o}{.}\PY{n}{score\PYZus{}ngrams}\PY{p}{(}\PY{n}{bigram\PYZus{}measures}\PY{o}{.}\PY{n}{raw\PYZus{}freq}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Moby Dick Bigrams \PYZhy{} Raw Frequency \PYZhy{} Stopword Filtering Applied }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{b}\PY{p}{,} \PY{n}{f} \PY{o+ow}{in} \PY{n}{mobyFreq}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{50}\PY{p}{]}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bigram: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{  Frequency: }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n}{f}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Moby Dick Bigrams - Raw Frequency - Stopword Filtering Applied 
+
+Bigram: ('sperm', 'whale')  Frequency: 0.00068
+Bigram: ('white', 'whale')  Frequency: 0.00042
+Bigram: ('moby', 'dick')  Frequency: 0.00032
+Bigram: ('old', 'man')  Frequency: 0.00029
+Bigram: ('captain', 'ahab')  Frequency: 0.00024
+Bigram: ('right', 'whale')  Frequency: 0.00020
+Bigram: ('captain', 'peleg')  Frequency: 0.00013
+Bigram: ('cried', 'ahab')  Frequency: 0.00013
+Bigram: ('mr.', 'starbuck')  Frequency: 0.00011
+Bigram: ('wo', "n't")  Frequency: 0.00011
+Bigram: ('one', 'hand')  Frequency: 0.00011
+Bigram: ('let', 'us')  Frequency: 0.00011
+Bigram: ('ca', "n't")  Frequency: 0.00010
+Bigram: ('every', 'one')  Frequency: 0.00009
+Bigram: ('cried', 'stubb')  Frequency: 0.00009
+Bigram: ('look', 'ye')  Frequency: 0.00009
+Bigram: ('never', 'mind')  Frequency: 0.00009
+Bigram: ('one', 'side')  Frequency: 0.00009
+Bigram: ('thou', 'art')  Frequency: 0.00008
+Bigram: ('new', 'bedford')  Frequency: 0.00007
+Bigram: ('said', 'stubb')  Frequency: 0.00007
+Bigram: ('sperm', 'whales')  Frequency: 0.00007
+Bigram: ('years', 'ago')  Frequency: 0.00007
+Bigram: ('cried', 'starbuck')  Frequency: 0.00007
+Bigram: ("n't", 'know')  Frequency: 0.00007
+Bigram: ('cape', 'horn')  Frequency: 0.00006
+Bigram: ('greenland', 'whale')  Frequency: 0.00006
+Bigram: ('lower', 'jaw')  Frequency: 0.00006
+Bigram: ("n't", 'ye')  Frequency: 0.00006
+Bigram: ('old', 'ahab')  Frequency: 0.00006
+Bigram: ('something', 'like')  Frequency: 0.00006
+Bigram: ('whale', 'fishery')  Frequency: 0.00006
+Bigram: ('young', 'man')  Frequency: 0.00006
+Bigram: ('ivory', 'leg')  Frequency: 0.00006
+Bigram: ('thus', 'far')  Frequency: 0.00006
+Bigram: ('well', 'known')  Frequency: 0.00006
+Bigram: ('whaling', 'voyage')  Frequency: 0.00006
+Bigram: ('would', 'seem')  Frequency: 0.00006
+Bigram: ('captain', 'bildad')  Frequency: 0.00005
+Bigram: ('chief', 'mate')  Frequency: 0.00005
+Bigram: ('ere', 'long')  Frequency: 0.00005
+Bigram: ('ye', 'see')  Frequency: 0.00005
+Bigram: ('dost', 'thou')  Frequency: 0.00005
+Bigram: ('ever', 'since')  Frequency: 0.00005
+Bigram: ('would', 'fain')  Frequency: 0.00005
+Bigram: ('forty', 'years')  Frequency: 0.00005
+Bigram: ('much', 'like')  Frequency: 0.00005
+Bigram: ('one', 'hundred')  Frequency: 0.00005
+Bigram: ('poor', 'queequeg')  Frequency: 0.00005
+Bigram: ('three', 'boats')  Frequency: 0.00005
+
+    \end{Verbatim}
+
+    \subsubsection{Bigram PMI}\label{bigram-pmi}
+
+The bigrams in the Moby Dick corpus were also evaluated on the metric of
+PMI. PMI takes the log base 2 of how much more likely the bigram is to
+occur than an occurance by random chance of those two tokens occurring
+together. A minimum occurance filter of 5 was also applied to the finder
+make sure that the bigram occurs at least five times in order to be
+considered. This would be in addition to the stopwords and
+non-alphavetic filter applied in the frequency analysis.
+
+The bigrams that appear in in order if PMI scoring are much more likely
+to be proper nouns. This is somewhat intuitive as the words used in a
+name or place are used less frequently than words in normal phrases or
+bigrams. It is also interesting that a lot of the bigrams from the Moby
+Dick corpus are related to time or number.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}Applying a minimum bigram frequency filter}
+        \PY{n}{finder}\PY{o}{.}\PY{n}{apply\PYZus{}freq\PYZus{}filter}\PY{p}{(}\PY{n}{min\PYZus{}freq}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n}{mobyPMI} \PY{o}{=} \PY{n}{finder}\PY{o}{.}\PY{n}{score\PYZus{}ngrams}\PY{p}{(}\PY{n}{bigram\PYZus{}measures}\PY{o}{.}\PY{n}{pmi}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Moby Dick Bigrams \PYZhy{} PMI \PYZhy{} Stopword and Min. Frequency Filtering Applied}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{b}\PY{p}{,} \PY{n}{pmi} \PY{o+ow}{in} \PY{n}{mobyPMI}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{50}\PY{p}{]}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bigram: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{  PMI: }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n}{pmi}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Moby Dick Bigrams - PMI - Stopword and Min. Frequency Filtering Applied
+
+Bigram: ('samuel', 'enderby')  PMI: 14.27825
+Bigram: ('mrs.', 'hussey')  PMI: 13.87261
+Bigram: ('heidelburgh', 'tun')  PMI: 13.73768
+Bigram: ('st.', 'george')  PMI: 13.34864
+Bigram: ('father', 'mapple')  PMI: 13.25964
+Bigram: ('huzza', 'porpoise')  PMI: 13.03408
+Bigram: ('fiery', 'pit')  PMI: 12.88969
+Bigram: ('steering', 'oar')  PMI: 12.37511
+Bigram: ('cape', 'horn')  PMI: 11.93217
+Bigram: ('seven', 'hundred')  PMI: 11.90118
+Bigram: ('centuries', 'ago')  PMI: 11.79015
+Bigram: ('moby', 'dick')  PMI: 11.58482
+Bigram: ('new', 'york')  PMI: 11.55068
+Bigram: ('new', 'zealand')  PMI: 11.55068
+Bigram: ('new', 'bedford')  PMI: 11.55068
+Bigram: ('book', 'ii')  PMI: 11.12719
+Bigram: ('saturday', 'night')  PMI: 10.90479
+Bigram: ('drew', 'nigh')  PMI: 10.65934
+Bigram: ('chief', 'mate')  PMI: 10.64331
+Bigram: ('years', 'ago')  PMI: 10.45228
+Bigram: ('english', 'whalers')  PMI: 10.41937
+Bigram: ('forty', 'years')  PMI: 10.39339
+Bigram: ('brought', 'alongside')  PMI: 10.27919
+Bigram: ('lower', 'jaw')  PMI: 10.20519
+Bigram: ('four', 'oceans')  PMI: 10.19454
+Bigram: ('thousand', 'miles')  PMI: 10.12357
+Bigram: ('drawing', 'nigh')  PMI: 10.07438
+Bigram: ('new', 'england')  PMI: 10.03611
+Bigram: ('pagan', 'harpooneers')  PMI: 10.01522
+Bigram: ('ca', "n't")  PMI: 9.98280
+Bigram: ('wo', "n't")  PMI: 9.98280
+Bigram: ('closed', 'eyes')  PMI: 9.93771
+Bigram: ('full', 'grown')  PMI: 9.81797
+Bigram: ('good', 'deal')  PMI: 9.75306
+Bigram: ('pequod', 'meets')  PMI: 9.74576
+Bigram: ('ivory', 'leg')  PMI: 9.73511
+Bigram: ('drew', 'near')  PMI: 9.69329
+Bigram: ('thou', 'knowest')  PMI: 9.63095
+Bigram: ('good', 'luck')  PMI: 9.44494
+Bigram: ('fair', 'wind')  PMI: 9.39212
+Bigram: ('poor', 'devils')  PMI: 9.38719
+Bigram: ('mr.', 'starbuck')  PMI: 9.35275
+Bigram: ('little', 'king-post')  PMI: 9.26311
+Bigram: ('dost', 'thou')  PMI: 9.20211
+Bigram: ('whaling', 'vessels')  PMI: 9.18859
+Bigram: ('old', 'mogul')  PMI: 9.16891
+Bigram: ('twenty', 'feet')  PMI: 9.13489
+Bigram: ('thirty', 'years')  PMI: 9.13035
+Bigram: ('drawing', 'near')  PMI: 9.10833
+Bigram: ('murmured', 'starbuck')  PMI: 9.08971
+
+    \end{Verbatim}
+
+    \subsubsection{Trigrams}\label{trigrams}
+
+An analysis of the trigrams in Moby Dick was also conducted. Similar to
+the bigrams, the potential trigrams were narrowed down to have a minimum
+frequency of 3, and to not contain any stopwords or puntuation. The
+minimum frequency was applied to the trigrams before the word filter
+because the minimum frequency narrows dow the potential trigrams
+significantly and allows the trigrams to be processed quicker. There
+were only 22 different trigrams that met these standards
+
+The trigrams that appeared most frequently generally already had a
+frequently occurring bigram. In fact, there were three different
+trigrams that contained the most frequently occurring bigram, sperm
+whale. Aside from the trigrams that contained "sperm whale", the only
+other repeated pattern in the trigrams is the decription if a time
+period "X" years ago.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{}Moby Dick Trigram Finder}
+         \PY{n}{triFinder} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{TrigramCollocationFinder}\PY{o}{.}\PY{n}{from\PYZus{}words}\PY{p}{(}\PY{n}{mobydickTokens}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}At Least 5 times}
+         \PY{n}{triFinder}\PY{o}{.}\PY{n}{apply\PYZus{}freq\PYZus{}filter}\PY{p}{(}\PY{n}{min\PYZus{}freq}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}No Punctuation}
+         \PY{n}{triFinder}\PY{o}{.}\PY{n}{apply\PYZus{}word\PYZus{}filter}\PY{p}{(}\PY{n}{alphaFilter}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Scoring Methods For trigrams}
+         \PY{n}{triScore} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{TrigramAssocMeasures}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Scored trigrams}
+         \PY{n}{trigrams} \PY{o}{=} \PY{n}{triFinder}\PY{o}{.}\PY{n}{score\PYZus{}ngrams}\PY{p}{(}\PY{n}{triScore}\PY{o}{.}\PY{n}{raw\PYZus{}freq}\PY{p}{)}
+         \PY{n}{trigrams}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} [(('great', 'sperm', 'whale'), 4.313911580499551e-05),
+          (('every', 'one', 'knows'), 3.529564020408723e-05),
+          (('sperm', 'whale', 'fishery'), 1.9608689002270686e-05),
+          (('wo', "n't", 'ye'), 1.9608689002270686e-05),
+          (('god', 'bless', 'ye'), 1.568695120181655e-05),
+          (('old', 'manx', 'sailor'), 1.568695120181655e-05),
+          (('round', 'cape', 'horn'), 1.568695120181655e-05),
+          (('thou', 'clear', 'spirit'), 1.568695120181655e-05),
+          (('ca', "n't", 'sell'), 1.1765213401362411e-05),
+          (('fifty', 'years', 'ago'), 1.1765213401362411e-05),
+          (('first', 'congregational', 'church'), 1.1765213401362411e-05),
+          (('first', 'night', 'watch'), 1.1765213401362411e-05),
+          (('forty', 'years', 'ago'), 1.1765213401362411e-05),
+          (('great', 'heidelburgh', 'tun'), 1.1765213401362411e-05),
+          (('great', 'south', 'sea'), 1.1765213401362411e-05),
+          (('large', 'sperm', 'whale'), 1.1765213401362411e-05),
+          (('let', 'us', 'fly'), 1.1765213401362411e-05),
+          (('queequeg', 'dies', 'game'), 1.1765213401362411e-05),
+          (('shall', 'ere', 'long'), 1.1765213401362411e-05),
+          (('stop', 'dat', 'dam'), 1.1765213401362411e-05),
+          (('thou', 'grinning', 'whale'), 1.1765213401362411e-05),
+          (('three', 'centuries', 'ago'), 1.1765213401362411e-05)]
+\end{Verbatim}
+            
+    \section{20,000 Leagues Under the Sea Corpus
+Statistics}\label{leagues-under-the-sea-corpus-statistics}
+
+    \subsubsection{Word Frequency}\label{word-frequency}
+
+The most frequent words and bigrams in 20,000 Leagues Under the Sea were
+found using the same techniques and methods used to find the most
+frequent words and bigrams in Moby Dick.
+
+The most common words that remained after the removal of stopwords and
+non-alphabetic tokens were largely related to the ocean or the
+characters. Once again the sea-faring vessel (nautilis) appeared as one
+of the most frequently occurring tokens along with the captain of the
+ship, nemo. The frequently occurring words appear to be more gender
+neutral.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}Creating a frequency dictionary with the applied filter}
+        \PY{n}{leaguesDict} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{FreqDist}\PY{p}{(}\PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{leaguesTokens} \PY{k}{if} \PY{o+ow}{not} \PY{n}{alphaFilter}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{20,000 Leagues Under the Sea Normalized Word Frequency \PYZhy{} Stopwords Removed}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}For each word and count for the 50 most common words in the dictionary...}
+        \PY{k}{for} \PY{n}{w}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n}{leaguesDict}\PY{o}{.}\PY{n}{most\PYZus{}common}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}Print the word and the count divided by the number of tokens in the non\PYZhy{}filtered}
+            \PY{c+c1}{\PYZsh{}tokenized list}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Word: }\PY{l+s+si}{\PYZob{}:s\PYZcb{}}\PY{l+s+s2}{        }\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Frequency: }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{c} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{leaguesTokens}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+20,000 Leagues Under the Sea Normalized Word Frequency - Stopwords Removed
+
+Word: captain        	Frequency: 0.00514
+Word: nautilus        	Frequency: 0.00420
+Word: nemo        	Frequency: 0.00301
+Word: one        	Frequency: 0.00289
+Word: said        	Frequency: 0.00269
+Word: ned        	Frequency: 0.00260
+Word: could        	Frequency: 0.00250
+Word: sea        	Frequency: 0.00244
+Word: us        	Frequency: 0.00241
+Word: would        	Frequency: 0.00232
+Word: conseil        	Frequency: 0.00227
+Word: land        	Frequency: 0.00208
+Word: water        	Frequency: 0.00172
+Word: two        	Frequency: 0.00171
+Word: like        	Frequency: 0.00167
+Word: sir        	Frequency: 0.00158
+Word: long        	Frequency: 0.00136
+Word: see        	Frequency: 0.00122
+Word: feet        	Frequency: 0.00117
+Word: surface        	Frequency: 0.00116
+Word: must        	Frequency: 0.00116
+Word: canadian        	Frequency: 0.00115
+Word: time        	Frequency: 0.00114
+Word: day        	Frequency: 0.00112
+Word: without        	Frequency: 0.00112
+Word: well        	Frequency: 0.00112
+Word: replied        	Frequency: 0.00110
+Word: made        	Frequency: 0.00108
+Word: ocean        	Frequency: 0.00103
+Word: saw        	Frequency: 0.00099
+Word: seemed        	Frequency: 0.00096
+Word: great        	Frequency: 0.00096
+Word: man        	Frequency: 0.00096
+Word: air        	Frequency: 0.00094
+Word: went        	Frequency: 0.00092
+Word: still        	Frequency: 0.00090
+Word: upon        	Frequency: 0.00089
+Word: light        	Frequency: 0.00089
+Word: miles        	Frequency: 0.00086
+Word: last        	Frequency: 0.00084
+Word: yards        	Frequency: 0.00083
+Word: vessel        	Frequency: 0.00083
+Word: waves        	Frequency: 0.00081
+Word: waters        	Frequency: 0.00080
+Word: know        	Frequency: 0.00078
+Word: first        	Frequency: 0.00076
+Word: nothing        	Frequency: 0.00076
+Word: large        	Frequency: 0.00076
+Word: board        	Frequency: 0.00076
+Word: boat        	Frequency: 0.00074
+
+    \end{Verbatim}
+
+    \subsubsection{Bigram Frequency}\label{bigram-frequency}
+
+The frequency analysis of the bigrams in 20,000 Leagues Under the Sea
+underwent the same processing that the Moby Dick bigrams went through.
+The frequently occurring bigrams in 20,000 Leagues Under the Sea were
+primarily either proper nouns, or common phrases. The only maritime
+related phrase in the frequent bigram list is ("submarine", "boat").
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}Finds bigrams from }
+        \PY{n}{finder} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{BigramCollocationFinder}\PY{o}{.}\PY{n}{from\PYZus{}words}\PY{p}{(}\PY{n}{leaguesTokens}\PY{p}{)}
+        \PY{n}{finder}\PY{o}{.}\PY{n}{apply\PYZus{}word\PYZus{}filter}\PY{p}{(}\PY{n}{alphaFilter}\PY{p}{)}
+        \PY{n}{leaguesFreq} \PY{o}{=} \PY{n}{finder}\PY{o}{.}\PY{n}{score\PYZus{}ngrams}\PY{p}{(}\PY{n}{bigram\PYZus{}measures}\PY{o}{.}\PY{n}{raw\PYZus{}freq}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{20,000 Leagues Under the Sea Bigrams \PYZhy{} Raw Frequency \PYZhy{} Stopword Filtering Applied }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{b}\PY{p}{,} \PY{n}{f} \PY{o+ow}{in} \PY{n}{leaguesFreq}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{50}\PY{p}{]}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bigram: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{  Frequency: }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n}{f}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+20,000 Leagues Under the Sea Bigrams - Raw Frequency - Stopword Filtering Applied 
+
+Bigram: ('captain', 'nemo')  Frequency: 0.00300
+Bigram: ('ned', 'land')  Frequency: 0.00156
+Bigram: ('m.', 'aronnax')  Frequency: 0.00043
+Bigram: ('said', 'conseil')  Frequency: 0.00042
+Bigram: ('abraham', 'lincoln')  Frequency: 0.00035
+Bigram: ('let', 'us')  Frequency: 0.00027
+Bigram: ('next', 'day')  Frequency: 0.00024
+Bigram: ('said', 'ned')  Frequency: 0.00024
+Bigram: ('red', 'sea')  Frequency: 0.00020
+Bigram: ('friend', 'ned')  Frequency: 0.00017
+Bigram: ('said', 'captain')  Frequency: 0.00016
+Bigram: ('could', 'see')  Frequency: 0.00015
+Bigram: ('electric', 'light')  Frequency: 0.00015
+Bigram: ('feet', 'long')  Frequency: 0.00014
+Bigram: ('replied', 'conseil')  Frequency: 0.00014
+Bigram: ('master', 'land')  Frequency: 0.00012
+Bigram: ('one', 'day')  Frequency: 0.00012
+Bigram: ('south', 'pole')  Frequency: 0.00012
+Bigram: ('replied', 'ned')  Frequency: 0.00011
+Bigram: ('two', 'hours')  Frequency: 0.00011
+Bigram: ('replied', 'captain')  Frequency: 0.00011
+Bigram: ('several', 'times')  Frequency: 0.00011
+Bigram: ('two', 'miles')  Frequency: 0.00011
+Bigram: ('commander', 'farragut')  Frequency: 0.00010
+Bigram: ('gulf', 'stream')  Frequency: 0.00010
+Bigram: ('open', 'sea')  Frequency: 0.00010
+Bigram: ('central', 'staircase')  Frequency: 0.00009
+Bigram: ('dumont', "d'urville")  Frequency: 0.00009
+Bigram: ('indian', 'ocean')  Frequency: 0.00009
+Bigram: ('thirty', 'feet')  Frequency: 0.00009
+Bigram: ('two', 'yards')  Frequency: 0.00009
+Bigram: ('yards', 'long')  Frequency: 0.00009
+Bigram: ('asked', 'conseil')  Frequency: 0.00008
+Bigram: ('carried', 'away')  Frequency: 0.00008
+Bigram: ('eleven', "o'clock")  Frequency: 0.00008
+Bigram: ('hundred', 'feet')  Frequency: 0.00008
+Bigram: ('ten', 'yards')  Frequency: 0.00008
+Bigram: ('twenty', 'miles')  Frequency: 0.00008
+Bigram: ('fifty', 'feet')  Frequency: 0.00007
+Bigram: ('heart', 'beat')  Frequency: 0.00007
+Bigram: ('new', 'york')  Frequency: 0.00007
+Bigram: ('six', 'months')  Frequency: 0.00007
+Bigram: ('submarine', 'boat')  Frequency: 0.00007
+Bigram: ('two', 'thousand')  Frequency: 0.00007
+Bigram: ('upper', 'part')  Frequency: 0.00007
+Bigram: ('cape', 'horn')  Frequency: 0.00006
+Bigram: ('captain', "nemo's")  Frequency: 0.00006
+Bigram: ('door', 'opened')  Frequency: 0.00006
+Bigram: ('first', 'time')  Frequency: 0.00006
+Bigram: ('five', 'hundred')  Frequency: 0.00006
+
+    \end{Verbatim}
+
+    \subsubsection{Bigram PMI}\label{bigram-pmi}
+
+When looking at the top PMI scored bigrams, many of the bigrams are
+either geographic location or descriptions or some sort of general
+phrase. There are not any maritime related bigrams, aside from some
+famous maritime landmarks; and there are very few names of people in the
+list. If there were to be some sort of theme in the bigrams with the
+highest PMI score, it would be famous landmarks, and natural/science
+related phrases.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}Applying a minimum bigram frequency filter}
+        \PY{n}{finder}\PY{o}{.}\PY{n}{apply\PYZus{}freq\PYZus{}filter}\PY{p}{(}\PY{n}{min\PYZus{}freq}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n}{leaguesPMI} \PY{o}{=} \PY{n}{finder}\PY{o}{.}\PY{n}{score\PYZus{}ngrams}\PY{p}{(}\PY{n}{bigram\PYZus{}measures}\PY{o}{.}\PY{n}{pmi}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{20,000 Leagues Under the Sea Bigrams \PYZhy{} PMI \PYZhy{} Stopword and Min. Frequency Filtering Applied }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{b}\PY{p}{,} \PY{n}{pmi} \PY{o+ow}{in} \PY{n}{leaguesPMI}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{50}\PY{p}{]}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bigram: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{  PMI: }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n}{pmi}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+20,000 Leagues Under the Sea Bigrams - PMI - Stopword and Min. Frequency Filtering Applied 
+
+Bigram: ('carbonic', 'acid')  PMI: 14.33126
+Bigram: ('united', 'states')  PMI: 13.33126
+Bigram: ('dumont', "d'urville")  PMI: 13.21578
+Bigram: ('inclined', 'planes')  PMI: 12.63082
+Bigram: ('central', 'staircase')  PMI: 12.56829
+Bigram: ('worthy', 'fellow')  PMI: 12.18286
+Bigram: ('vigo', 'bay')  PMI: 11.93322
+Bigram: ('favourable', 'opportunity')  PMI: 11.77871
+Bigram: ('cape', 'horn')  PMI: 11.53684
+Bigram: ('torres', 'straits')  PMI: 11.53540
+Bigram: ('gulf', 'stream')  PMI: 11.44319
+Bigram: ('luminous', 'ceiling')  PMI: 11.43817
+Bigram: ('abraham', 'lincoln')  PMI: 11.42362
+Bigram: ('solar', 'rays')  PMI: 11.40842
+Bigram: ('ruhmkorff', 'apparatus')  PMI: 11.37190
+Bigram: ('thousand', 'dollars')  PMI: 11.36778
+Bigram: ('coral', 'cemetery')  PMI: 11.18286
+Bigram: ('new', 'york')  PMI: 11.03357
+Bigram: ('hissing', 'noise')  PMI: 11.00933
+Bigram: ('forty-eight', 'hours')  PMI: 10.87182
+Bigram: ('commander', 'farragut')  PMI: 10.79382
+Bigram: ('northern', 'regions')  PMI: 10.66829
+Bigram: ('m.', 'aronnax')  PMI: 10.65687
+Bigram: ('natural', 'history')  PMI: 10.64320
+Bigram: ('heart', 'beat')  PMI: 10.63493
+Bigram: ('set', 'foot')  PMI: 10.52390
+Bigram: ('twenty-four', 'hours')  PMI: 10.50925
+Bigram: ('eleven', "o'clock")  PMI: 10.13748
+Bigram: ('south', 'pole')  PMI: 10.10886
+Bigram: ('carried', 'away')  PMI: 10.06322
+Bigram: ('take', 'possession')  PMI: 9.87182
+Bigram: ('minutes', 'later')  PMI: 9.75837
+Bigram: ('second', 'lieutenant')  PMI: 9.68740
+Bigram: ('arms', 'crossed')  PMI: 9.68740
+Bigram: ('iron', 'plates')  PMI: 9.62466
+Bigram: ('must', 'necessarily')  PMI: 9.55365
+Bigram: ('without', 'noticing')  PMI: 9.53424
+Bigram: ('six', 'months')  PMI: 9.42436
+Bigram: ('liquid', 'mass')  PMI: 9.33376
+Bigram: ('next', 'day')  PMI: 9.31185
+Bigram: ('several', 'times')  PMI: 9.08333
+Bigram: ('certain', 'number')  PMI: 9.05699
+Bigram: ('good', 'hope')  PMI: 9.03532
+Bigram: ('north', 'pacific')  PMI: 8.98430
+Bigram: ('upper', 'part')  PMI: 8.93894
+Bigram: ('american', 'coast')  PMI: 8.93894
+Bigram: ('sixty', 'feet')  PMI: 8.88831
+Bigram: ('boiling', 'water')  PMI: 8.69608
+Bigram: ('greater', 'part')  PMI: 8.63777
+Bigram: ('thirty', 'feet')  PMI: 8.61078
+
+    \end{Verbatim}
+
+    \subsubsection{Trigrams}\label{trigrams}
+
+The trigrams in 20,000 Leagues Under the Sea tokens were also processed
+to find any frequently occurring trigrams. These trigrams were filtered
+to ensure that they occurred a minimum of three time, and did not
+include any non-alphabetic tokens or stopwords. There were 35 different
+trigrams that met these requirements.
+
+The most prominent tokens within the trigrams are "captain" and "nemo".
+More than half of the frequently occurring trigrams contained the name
+Captain Nemo. There were also a prominent amount of action verbs
+connected with a name, particularly verbs related to dialogue. It is
+also noteworthy that four different trigrams occur frequently enough
+within the text that they appear more frequently than some of the most
+frequently occurring bigrams in 20,000 Leagues Under the Sea.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{}20,000 Leagues Trigram Finder}
+         \PY{n}{triFinder} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{TrigramCollocationFinder}\PY{o}{.}\PY{n}{from\PYZus{}words}\PY{p}{(}\PY{n}{leaguesTokens}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}At Least 3 times}
+         \PY{n}{triFinder}\PY{o}{.}\PY{n}{apply\PYZus{}freq\PYZus{}filter}\PY{p}{(}\PY{n}{min\PYZus{}freq}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}No Punctuation}
+         \PY{n}{triFinder}\PY{o}{.}\PY{n}{apply\PYZus{}word\PYZus{}filter}\PY{p}{(}\PY{n}{alphaFilter}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Scoring Methods For trigrams}
+         \PY{n}{triScore} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{TrigramAssocMeasures}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Scored trigrams by frequency}
+         \PY{n}{trigrams} \PY{o}{=} \PY{n}{triFinder}\PY{o}{.}\PY{n}{score\PYZus{}ngrams}\PY{p}{(}\PY{n}{triScore}\PY{o}{.}\PY{n}{raw\PYZus{}freq}\PY{p}{)}
+         \PY{n}{trigrams}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} [(('said', 'captain', 'nemo'), 0.0001617115550991696),
+          (('said', 'ned', 'land'), 0.00014554039958925266),
+          (('replied', 'captain', 'nemo'), 0.00010511251081446025),
+          (('replied', 'ned', 'land'), 8.894135530454329e-05),
+          (('captain', 'nemo', 'stopped'), 5.659904428470936e-05),
+          (('captain', 'nemo', 'took'), 4.851346652975088e-05),
+          (('captain', 'nemo', 'went'), 4.851346652975088e-05),
+          (('cried', 'ned', 'land'), 4.851346652975088e-05),
+          (('let', 'us', 'go'), 4.851346652975088e-05),
+          (('captain', 'nemo', 'appeared'), 4.04278887747924e-05),
+          (('exclaimed', 'ned', 'land'), 4.04278887747924e-05),
+          (('captain', 'nemo', 'entered'), 3.234231101983392e-05),
+          (('captain', 'nemo', 'pointed'), 3.234231101983392e-05),
+          (('let', 'us', 'try'), 3.234231101983392e-05),
+          (('moment', 'captain', 'nemo'), 3.234231101983392e-05),
+          (('saw', 'captain', 'nemo'), 3.234231101983392e-05),
+          (('two', 'thousand', 'dollars'), 3.234231101983392e-05),
+          (('answered', 'captain', 'nemo'), 2.425673326487544e-05),
+          (('ask', 'captain', 'nemo'), 2.425673326487544e-05),
+          (('captain', 'nemo', 'gave'), 2.425673326487544e-05),
+          (('captain', 'nemo', 'joined'), 2.425673326487544e-05),
+          (('captain', 'nemo', 'looked'), 2.425673326487544e-05),
+          (('captain', 'nemo', 'rose'), 2.425673326487544e-05),
+          (('captain', 'nemo', 'said'), 2.425673326487544e-05),
+          (('continued', 'captain', 'nemo'), 2.425673326487544e-05),
+          (('could', 'see', 'nothing'), 2.425673326487544e-05),
+          (('could', 'still', 'see'), 2.425673326487544e-05),
+          (('five', 'yards', 'long'), 2.425673326487544e-05),
+          (('followed', 'captain', 'nemo'), 2.425673326487544e-05),
+          (('heart', 'beat', 'fast'), 2.425673326487544e-05),
+          (('let', 'us', 'continue'), 2.425673326487544e-05),
+          (('nemo', 'went', 'towards'), 2.425673326487544e-05),
+          (('see', 'captain', 'nemo'), 2.425673326487544e-05),
+          (('six', 'feet', 'long'), 2.425673326487544e-05),
+          (('three', 'thousand', 'years'), 2.425673326487544e-05)]
+\end{Verbatim}
+            
+    \section{Similarities}\label{similarities}
+
+There are definitely some similarities between Moby Dick and 20,00
+Leagues Under the Sea. 44\% of the top 50 most frequently occurring
+tokens were shared between the two texts. These shared most frequently
+occurring words words were: 'captain', 'one', 'said', 'could', 'sea',
+'us', 'would', 'two', 'like', 'long', 'see', 'must', 'time', 'well',
+'seemed', 'great', 'man', 'still', 'upon', 'last', 'first', and 'boat'.
+
+Captain, boat, and sea show the similarity of the setting between the
+two novels. The other shared frequently occurring words do not tell much
+about the texts as they are fairly generic nouns, adjectives, and verbs.
+Both novels also had the captain of the ship's name included in the most
+frequent words (Ahab, and Nemo). Both novels also had the highly scored
+bigram of Cape and Horn in terms of PMI. There is also very little
+difference in the complexity of the two novels, as unique words make up
+approximately 0.073 in both novels.
+
+Additionally, when looking at bigrams scored by frequency and PMI, both
+texts generally had characters scored high in both scoring methods.
+Other than characters, simpler, more common words were generally scored
+high in terms of frequency. This is likely because in addition to
+intentional word pairings, there is a higher probability that these
+tokens will randomly appear next to each other accidentally. Dialogue
+phrases were especially abundant in the bigram list scored by frequency.
+
+Both texts also had similarities in the bigrams that were highly scored
+by PMI. These bigrams tended to be either people, places, or lengthier
+words. There also fewer dialogue phrases in both of the bigrams list,
+which is likely due to the higher frequency/probability of the prior
+when computing the PMI.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}Tokens that appeared in both top occurring 50}
+         \PY{c+c1}{\PYZsh{}Top Moby Dick}
+         \PY{n}{mobyDickTop} \PY{o}{=} \PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n}{mobyDict}\PY{o}{.}\PY{n}{most\PYZus{}common}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}20k leagues top}
+         \PY{n}{leagueTop} \PY{o}{=} \PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n}{leaguesDict}\PY{o}{.}\PY{n}{most\PYZus{}common}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}tokens in both}
+         \PY{n}{both\PYZus{}tokens} \PY{o}{=} \PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{leagueTop} \PY{k}{if} \PY{n}{w} \PY{o+ow}{in} \PY{n}{mobyDickTop}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}Percentage of the top 50 in both}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}:.0f\PYZcb{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f the top 50 tokens are in both top 50}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{both\PYZus{}tokens}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{50} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Shared Tokens}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{both\PYZus{}tokens}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}20,000 League Under the Sea Word choice}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Fraction of unique words for 20,000 Leagues Under the Sea: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+             \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{leaguesTokens}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{leaguesTokens}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Moby Dick Word choice}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Fraction of unique words for Moby Dick: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+             \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{mobydickTokens}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{mobydickTokens}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+44\% of the top 50 tokens are in both top 50
+
+Shared Tokens
+
+ ['captain', 'one', 'said', 'could', 'sea', 'us', 'would', 'two', 'like', 'long', 'see', 'must', 'time', 'well', 'seemed', 'great', 'man', 'still', 'upon', 'last', 'first', 'boat']
+
+Fraction of unique words for 20,000 Leagues Under the Sea: 0.0727
+
+Fraction of unique words for Moby Dick: 0.0734
+
+    \end{Verbatim}
+
+    \section{Differences}\label{differences}
+
+While there are some similarities, the differences between the two
+novels outweigh the similarities. Firstly, the American-isms are present
+in Moby Dick, and absent from 20,000 Leagues Under the Sea. This is seen
+by the the requently occurring words in Moby Dick, which include "ye",
+"thou", and "n't", while the 20,000 Leagues Under the Sea tokens are
+simple words that one could expect to in simplistic writings including
+"land", "feet", and "large". This difference is also exacerbated by the
+presence of different contractions in the frequently occurring Moby Dick
+bigram list (4), and the complete absence of them in the 20,000 Leagues
+Under the Sea. This could be because the translator wanted to transcribe
+a more formal translation of the book.
+
+One noticable differences between the two texts can be seen in the
+bigrams. The most frequently occurring bigrams in Moby Dick were related
+to the plot or some sort of decriptive phrase. Sperm whale was the most
+frequently occurring bigram becuse the fictional whale and main
+character in the story was a sperm whale. In fact, of the 50 most
+commonly occurring bigrams in Moby Dick, eight different bigrams were
+whale related. 20,000 Leagues Under the Sea's top 5 bigrams were related
+to either a person's name or a boat in the novel. The most frequently
+appearing bigrams in 20,000 Leagues Under the Sea were generally either
+names, verb phrases, measurements, or locations.
+
+The differences in the frequently appearing bigrams show that there has
+been a more focused effort to be descriptive of the characters and
+surrounding in Moby Dick, while the 20,000 Leagues Under the Sea
+translation was more focused on dialogue and the storytelling. This
+difference is especially noticable when comparing the dialogue phrases
+used in each of the novels. When a character is speaking in Moby Dick,
+they tend to be crying, or in some form anguish (cried ahab, cried
+stubb, cried starbuck). In 20,000 Leagues Under the Sea, verb phrasing
+in the dialogue is more neutral (said conseil, said captain, replied
+conseil).
+
+The trigrams analysis further support the idea that the 20,000 Leagues
+Under the Sea translation was more related to the actions and
+interaction of characters than Moby Dick. 25 of the 35 trigrams 20,000
+Leagues were contained part of a characters name and a verb. This would
+suggest a more simplified story being told in 20,000 Leagues Under the
+Sea, primarily of dialogue and actions of characters. The trigrams
+present Moby Dick are largely whaling related or random general phrases.
+Additionally, the trigrams in 20,000 Leagues Under the sea occur more
+often than the trigrams in Moby Dick, as the top eight trigrams in
+20,000 Leagues Under the Sea appeared more often than the top trigram in
+Moby Dick.
+
+These large difference in style are ones that I think could be
+attributed to the translation of the book. Moby dick was written in
+Melville's native English, in which he knows how he wants the book to
+sound in English. I would imagine that if 20,000 Leagues Under the Sea
+had been written in English, it would share some of the same anguish in
+the dialogue; however, this keeps the dialogue phrases simple with the
+verbs replied and said. It is also interesting at how many frequently
+occurring bigrams in 20,000 Leagues Under the Sea have to deal with
+numbers and measurements. The style of focusing on the story and the
+characters in the 20,000 Leagues translation becomes even more apparent
+when looking at the frequency of the bigrams. The (Captain, Nemo) bigram
+appears more than four times as frequent as the most frequently
+appearing bigram in Moby Dick (sperm, whale); additionally, the (Ned,
+Land) bigram appears more than twice as often as most frequently
+occurring Moby Dick bigram.
+
+In terms of bigrams scored by PMI, Moby Dick's bigrams tend to be either
+names, places or descriptions. 20,000 Leagues also has some bigrams of
+places, but there is also a major scientific and engineering theme. This
+is especially apparent with carbonic acid having the highest PMI score
+while appearing a minimum of five times.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{}Frequently occurring tokens in only 20000 Leagues}
+         \PY{n}{leagueOnlyTokens} \PY{o}{=} \PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{leagueTop} \PY{k}{if} \PY{n}{w} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{mobyDickTop}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}Frequently occurring tokens in only Moby Dick}
+         \PY{n}{mobyDickOnlyTokens} \PY{o}{=} \PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{mobyDickTop} \PY{k}{if} \PY{n}{w} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{leagueTop}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{20,000 Leagues Only Frequently Occurring Tokens}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{leagueOnlyTokens}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Moby Dick Only Frequently Occurring Tokens}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mobyDickOnlyTokens}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+20,000 Leagues Only Frequently Occurring Tokens
+
+ ['nautilus', 'nemo', 'ned', 'conseil', 'land', 'water', 'sir', 'feet', 'surface', 'canadian', 'day', 'without', 'replied', 'made', 'ocean', 'saw', 'air', 'went', 'light', 'miles', 'yards', 'vessel', 'waves', 'waters', 'know', 'nothing', 'large', 'board']
+
+Moby Dick Only Frequently Occurring Tokens
+
+ ['whale', 'ahab', 'ship', 'old', 'ye', 'though', 'yet', 'head', 'thou', 'whales', 'way', 'stubb', "n't", 'queequeg', 'little', 'white', 'round', 'say', 'sperm', 'three', 'men', 'may', 'every', 'much', 'never', 'hand', 'good', 'almost']
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

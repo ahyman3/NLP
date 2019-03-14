@@ -1,0 +1,131 @@
+# Week 2:  Bigram Frequencies and Mutual Information
+# This file has small examples that are meant to be run individually
+#   in the Python interpreter or jupyter notebook cells
+
+# Getting started to process a text example
+import nltk
+from nltk import FreqDist
+
+# get the text of the book Emma from the Gutenberg corpus, tokenize it,
+#   and reduce the tokens to lowercase.
+file0 = nltk.corpus.gutenberg.fileids( ) [0]
+emmatext = nltk.corpus.gutenberg.raw(file0)
+emmatokens = nltk.word_tokenize(emmatext) 
+emmawords = [w.lower( ) for w in emmatokens] 
+# show some of the words
+print(len(emmawords))print(emmawords[ :110])
+# Creating a frequency distribution of words
+ndist = FreqDist(emmawords)
+
+# print the top 30 tokens by frequency
+nitems = ndist.most_common(30)
+for item in nitems:
+    print (item[0], '\t', item[1])
+
+# look at other tokenization from the corpus
+emmawords2 = nltk.corpus.gutenberg.words('austen-emma.txt')
+emmawords2lowercase = [w.lower() for w in emmawords2]
+
+print(emmawords[:160])
+print(emmawords2lowercase[:160])
+
+
+## More on Python dictionaries and functions  ##
+
+# create two dictionaries
+emptydict = dict()phonedict = {'Bailey':'32-16','Char':'15-18', 'Dave': '20-15'} # Retrieve a value by indexing with its key.phonedict['Bailey']# Add a key, value pair by assigning a value to a new index.phonedict['Avi'] = '41-54'phonedict# key, values and items functionsprint(phonedict.keys())print(phonedict.values())print(phonedict.items())# test if a key is in the dictionary or not
+print('Char' in phonedict)print('Dave' not in phonedict)# loop over the key, value pairs
+for pair in phonedict.items():    print(pair)# the function doublesum takes 2 numbers as parameters, either int or float
+#  and returns a result which is the sum of those numbers multiplied by 2
+def doublesum (x, y):
+    result = 2 * (x + y)
+    return result
+
+print(doublesum(3, 5))
+num = doublesum(3.4, 2)
+print(num)
+
+# this function takes a string and a list of words as parameters.
+#   It will return all the words in the list that contain the string as a substring
+def searchstring (substring, wordlist):
+    # initialize the result
+    result = [ ]
+    #  loop over all the words
+    for word in wordlist:
+        # test each word if it contains the substring
+        if substring in word:
+            # add it to the result
+            result.append(word)
+    return result
+
+searchstring('zz', emmawords)
+
+# multiple variable assignment and usename, phone, location = ('Zack', '22-15', 'Room 159')
+print(name)
+print(phone)
+print(location)
+		
+##  Regular Expression to match non-alphabetic characters
+import re
+# this regular expression pattern matches any word that contains all non-alphabetical#   lower-case characters [^a-z]+# the beginning ^ and ending $ require the match to begin and end on a word boundary pattern = re.compile('^[^a-z]+$')nonAlphaMatch = pattern.match('**')#  if it matched, print a messageif nonAlphaMatch: print ('matched non-alphabetical')
+# function that takes a word and returns true if it consists only
+#   of non-alphabetic characters  (assumes import re)
+def alpha_filter(w):
+  # pattern to match word of non-alphabetical characters
+  pattern = re.compile('^[^a-z]+$')
+  if (pattern.match(w)):
+    return True
+  else:
+    return False
+# apply the function to emmawordsalphaemmawords = [w for w in emmawords if not alpha_filter(w)]print(alphaemmawords[:100])
+print(len(alphaemmawords))# get a list of stopwords from nltknltkstopwords = nltk.corpus.stopwords.words('english')print(len(nltkstopwords))
+print(nltkstopwords)# check tokenization in emmawords
+print(emmawords[:100])
+print(emmawords[15300:15310])
+morestopwords = ['could','would','might','must','need','sha','wo','y',"'s","'d","'ll","'t","'m","'re","'ve", "n't"]
+
+stopwords = nltkstopwords + morestopwords
+print(len(stopwords))
+print(stopwords)
+
+stoppedemmawords = [w for w in alphaemmawords if not w in stopwords]print(len(stoppedemmawords))
+
+# use this list for a better frequency distribution
+emmadist = FreqDist(stoppedemmawords)
+emmaitems = emmadist.most_common(30)
+for item in emmaitems:
+  print(item)
+# Bigrams and Bigram frequency distribution
+emmabigrams = list(nltk.bigrams(emmawords))
+print(emmawords[:21])
+print(emmabigrams[:20])
+
+# setup for bigrams and bigram measures
+from nltk.collocations import *
+bigram_measures = nltk.collocations.BigramAssocMeasures()
+
+# create the bigram finder and score the bigrams by frequency
+finder = BigramCollocationFinder.from_words(emmawords)scored = finder.score_ngrams(bigram_measures.raw_freq)# scored is a list of bigram pairs with their score
+print(type(scored))
+first = scored[0]
+print(type(first))
+print(first)
+
+# scores are sorted in decreasing frequency
+for bscore in scored[:30]:
+    print (bscore)# apply a filter to remove non-alphabetical tokens from the emma bigram finderfinder.apply_word_filter(alpha_filter)scored = finder.score_ngrams(bigram_measures.raw_freq)for bscore in scored[:30]:    print (bscore)
+
+# apply a filter to remove stop words
+finder.apply_word_filter(lambda w: w in stopwords)scored = finder.score_ngrams(bigram_measures.raw_freq)for bscore in scored[:20]:    print (bscore)# apply a filter (on a new finder) to remove low frequency words
+finder2 = BigramCollocationFinder.from_words(emmawords)finder2.apply_freq_filter(2)scored = finder2.score_ngrams(bigram_measures.raw_freq)for bscore in scored[:20]:    print (bscore)# apply a filter on both words of the ngramfinder2.apply_ngram_filter(lambda w1, w2: len(w1) < 2)
+scored = finder2.score_ngrams(bigram_measures.raw_freq)
+for bscore in scored[:20]:    print (bscore)
+
+### pointwise mutual information
+finder3 = BigramCollocationFinder.from_words(emmawords)
+scored = finder3.score_ngrams(bigram_measures.pmi)
+for bscore in scored[:20]:    print (bscore)
+
+# to get good results, must first apply frequency filter
+finder.apply_freq_filter(5)
+scored = finder.score_ngrams(bigram_measures.pmi)for bscore in scored[:30]:    print (bscore)
